@@ -1,0 +1,18 @@
+look:
+    4x6 grid
+   1. top row: output showing calculation
+   2. clear, backspace, x
+   3. 7 8 9 /
+   4. 4 5 6 +
+   5. 1 2 3 -
+   6. +/- 0 , =
+
+on click send the clicked value to a var showing on top,
+on clicking = do the calculation
+
+clear: set back output to 0
+backspace: clear the last digit from output string shown
+
+how many decimals to handle?
+
+
