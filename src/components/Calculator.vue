@@ -15,51 +15,51 @@
                                 </v-card-text>
                             </v-flex>
                             <v-flex xs6 pa-1>
-                                 <v-btn block dark color="#00897B" @click="onClickClear()">Clear</v-btn>
+                                 <v-btn block dark color="#00897B" @click="Clear()">Clear</v-btn>
                             </v-flex>
                             <v-flex xs3 pa-1>
-                                <v-btn block dark color="#00897B">
+                                <v-btn block dark color="#00897B" @click="Bcksp()">
                                     <v-icon>backspace</v-icon>
                                 </v-btn>
                             </v-flex>
                             <v-flex xs3 pa-1>
-                                <v-btn block dark color="#00897B" @click="onClickOper('*')">*</v-btn>
+                                <v-btn block dark color="#00897B" @click="setOper('*')">*</v-btn>
                             </v-flex>
                             <v-flex xs3 pa-1>
-                                <v-btn block dark color="#00897B" @click="onClickNo(7)">7</v-btn>
+                                <v-btn block dark color="#00897B" @click="setNumbers(7)">7</v-btn>
                             </v-flex>
                             <v-flex xs3 pa-1>
-                                <v-btn block dark color="#00897B" @click="onClickNo(8)">8</v-btn>
+                                <v-btn block dark color="#00897B" @click="setNumbers(8)">8</v-btn>
                             </v-flex>
                             <v-flex xs3 pa-1>
-                                <v-btn block dark color="#00897B" @click="onClickNo(9)">9</v-btn>
+                                <v-btn block dark color="#00897B" @click="setNumbers(9)">9</v-btn>
                             </v-flex>
                             <v-flex xs3 pa-1>
-                                <v-btn block dark color="#00897B" @click="onClickOper('/')">/</v-btn>
+                                <v-btn block dark color="#00897B" @click="setOper('/')">/</v-btn>
                             </v-flex>
                             <v-flex xs3 pa-1>
-                                <v-btn block dark color="#00897B" @click="onClickNo(4)">4</v-btn>
+                                <v-btn block dark color="#00897B" @click="setNumbers(4)">4</v-btn>
                             </v-flex>
                             <v-flex xs3 pa-1>
-                                <v-btn block dark color="#00897B" @click="onClickNo(5)">5</v-btn>
+                                <v-btn block dark color="#00897B" @click="setNumbers(5)">5</v-btn>
                             </v-flex>
                             <v-flex xs3 pa-1>
-                                <v-btn block dark color="#00897B" @click="onClickNo(6)">6</v-btn>
+                                <v-btn block dark color="#00897B" @click="setNumbers(6)">6</v-btn>
                             </v-flex>
                             <v-flex xs3 pa-1>
-                                <v-btn block dark color="#00897B" @click="onClickOper('+')">+</v-btn>
+                                <v-btn block dark color="#00897B" @click="setOper('+')">+</v-btn>
                             </v-flex>
                             <v-flex xs3 pa-1>
-                                <v-btn block dark color="#00897B" @click="onClickNo(1)">1</v-btn>
+                                <v-btn block dark color="#00897B" @click="setNumbers(1)">1</v-btn>
                             </v-flex>
                             <v-flex xs3 pa-1>
-                                <v-btn block dark color="#00897B" @click="onClickNo(2)">2</v-btn>
+                                <v-btn block dark color="#00897B" @click="setNumbers(2)">2</v-btn>
                             </v-flex>
                             <v-flex xs3 pa-1>
-                                <v-btn block dark color="#00897B" @click="onClickNo(3)">3</v-btn>
+                                <v-btn block dark color="#00897B" @click="setNumbers(3)">3</v-btn>
                             </v-flex>
                             <v-flex xs3 pa-1>
-                                <v-btn block dark color="#00897B" @click="onClickOper('-')">-</v-btn>
+                                <v-btn block dark color="#00897B" @click="setOper('-')">-</v-btn>
                             </v-flex>
                             <v-flex xs3 pa-1>
                                 <v-btn block dark depressed color="#00897B">
@@ -67,7 +67,7 @@
                                 </v-btn>
                             </v-flex>
                             <v-flex xs3 pa-1>
-                                <v-btn block dark color="#00897B" @click="onClickNo(0)">0</v-btn>
+                                <v-btn block dark color="#00897B" @click="setNumbers(0)">0</v-btn>
                             </v-flex>
                             <v-flex xs3 pa-1>
                                 <v-btn block dark depressed color="#00897B">
@@ -100,7 +100,7 @@ export default {
         }  
     },
     methods: {
-        onClickNo(number) {
+        setNumbers (number) {
             if (this.oper === null) {
                 if (this.no1 === null) {
                     this.no1 = number
@@ -115,7 +115,7 @@ export default {
                 }
             }
         },
-        onClickOper(oper) {
+        setOper(oper) {
             if (this.oper === null) {
                 this.oper = oper
             }
@@ -132,15 +132,25 @@ export default {
             }
              
         },
-        onClickClear() {
+        Clear() {
             this.result = null;
             this.no1 = null;
             this.no2 = null;
             this.oper = null;
+        },
+        Bcksp() {
+            if (this.no2 !== null) {
+                if (this.no2 > 9) {
+                    this.no2 = (this.no2 - this.no2 % 10) / 10
+                } else this.no2 = null
+            } else if (this.oper !== null) {
+                this.oper = null
+            } else if (this.no1 !== null) {
+                if (this.no1 > 9) {
+                    this.no1 = (this.no1 - this.no1 % 10) / 10
+                } else this.no1 = null
+            }
         }
-    },
-    computed: {
-        
     }
 }
     
